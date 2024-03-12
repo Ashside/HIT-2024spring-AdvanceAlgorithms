@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dfe8b3f9-6376-44e8-b3e8-a31ad1ef7b27" name="更改" comment="Lab1 完成">
-      <change afterPath="$PROJECT_DIR$/Homework/作业1.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab1/code/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab1/code/naive.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab1/code/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab2/code/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab2/code/linear_kth.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab2/code/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab2/code/quick_sort.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/Lab2/code/random_select.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Slides/ch1绪论.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Slides/ch2.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AdvanceAlgorithms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AdvanceAlgorithms.iml" afterDir="false" />
+    <list default="true" id="dfe8b3f9-6376-44e8-b3e8-a31ad1ef7b27" name="更改" comment="Lab2 部分完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/Lab1/src/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/Lab1/code/collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/Lab1/src/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/Lab1/src/minHash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/Lab1/code/minHash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/Lab1/src/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +95,7 @@
       <workItem from="1710135505543" duration="1823000" />
       <workItem from="1710152022140" duration="1174000" />
       <workItem from="1710153879022" duration="371000" />
+      <workItem from="1710248938099" duration="99000" />
     </task>
     <task id="LOCAL-00001" summary="Lab1 initial">
       <option name="closed" value="true" />
@@ -136,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710248200093</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Lab2 部分完成">
+      <option name="closed" value="true" />
+      <created>1710248230007</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710248230007</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +139,8 @@
     <MESSAGE value="Lab1 initial" />
     <MESSAGE value="Lab1 初步完成" />
     <MESSAGE value="Lab1 完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab1 完成" />
+    <MESSAGE value="Lab2 部分完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab2 部分完成" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
