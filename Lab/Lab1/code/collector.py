@@ -26,6 +26,9 @@ class Collector:
             # 跳过空行
             if len(line) == 0:
                 continue
+            # 如果不是以制表符分隔的两个数字，跳过
+            if len(line.split('\t')) != 2:
+                continue
             items = line.split('\t')
             # print(items)
             set_id = int(items[0])

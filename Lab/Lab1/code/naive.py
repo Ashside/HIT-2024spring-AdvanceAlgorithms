@@ -1,0 +1,30 @@
+from collector import Collector
+from tqdm import tqdm
+
+class Naive:
+    def __init__(self, __bound=0.9, __text_sel=3):
+        collector = Collector(__text_sel)
+        self.map = collector.get_data()
+        self.set_ids = collector.get_keys()
+        self.all_values = collector.get_all_values()
+        self.bound = __bound
+
+    def calc_similarity(self, set1, set2):
+        similarity = 0
+        union = len(set1.union(set2))
+        inter = len(set1.intersection(set2))
+        similarity = float(inter / union)
+        return similarity
+
+    def calc_similarity_all(self):
+        similarity_all = []
+        for i in tqdm(range(len(self.set_ids) - 1), desc='Calculating similarity'):
+            set1 = set(self.map[self.set_ids[i]])
+            id1 = self.set_ids[i]
+            for j in range(i + 1, len(self.set_ids)):
+                set2 = set(self.map[self.set_ids[j]])
+                id2 = self.set_ids[j]
+                similarity = self.calc_similarity(set1, set2)
+                if similarity >= self.bound:
+                    similarity_all.append((id1, id2, similarity))
+        return similarity_all
