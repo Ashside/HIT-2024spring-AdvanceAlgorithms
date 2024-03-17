@@ -3,7 +3,7 @@ from minHash import MinHash
 from naive import Naive
 
 
-def write_minHash(_collector, _iteration=10, _bound=0.9):
+def write_minHash(_collector, _n_samples, _bound=0.9, _iteration=10):
     # 获取数据
     minHash = MinHash(_collector, _iteration, _bound)
     # 将similarity的结果写入文件
@@ -14,7 +14,7 @@ def write_minHash(_collector, _iteration=10, _bound=0.9):
     print(f'MinHash Similarity{_collector.sel} has been written successfully')
 
 
-def write_naive(_collector, _bound=0.9):
+def write_naive(_collector, _n_samples, _bound=0.9):
     # 获取数据
     naive = Naive(_collector, _bound)
     # 将similarity的结果写入文件
@@ -53,12 +53,13 @@ if __name__ == '__main__':
     bound = 0.9
     text_sel = 0
     n_samples = 1000
-    # 获取数据
-    collector = Collector(text_sel, n_samples)
-    # 写入minHash的结果
-    write_minHash(collector, iteration, bound)
-    # 写入naive的结果
-    write_naive(collector, bound)
+    for text_sel in range(3):
+        # 获取数据
+        collector = Collector(text_sel, n_samples)
+        # 写入minHash的结果
+        write_minHash(collector, n_samples, bound, iteration)
+        # 写入naive的结果
+        write_naive(collector, n_samples, bound)
 
-    # 对比两者的结果
-    compare_file(text_sel, n_samples)
+        # 对比两者的结果
+        compare_file(text_sel, n_samples)

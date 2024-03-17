@@ -67,7 +67,7 @@ class MinHash:
                 similarity.append(count / len(hash_table[i]))'''
         row = len(hash_table)
         col = len(hash_table[0])
-        for i in tqdm.tqdm(range(col - 1), desc='Calculating similarity'):
+        for i in tqdm.tqdm(range(col - 1), desc='Calculating minHash similarity'):
             for j in range(i + 1, col):
                 count = 0
                 for k in range(row):

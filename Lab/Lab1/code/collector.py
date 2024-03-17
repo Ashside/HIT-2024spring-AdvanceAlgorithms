@@ -42,7 +42,7 @@ class Collector:
             with open(self.path, 'r') as file:
                 return file.read()
         except FileNotFoundError:
-            print("File not found")
+            print(f"{self.path} file not found")
             return None
 
     def _make_data(self):

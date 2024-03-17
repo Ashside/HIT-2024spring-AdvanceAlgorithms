@@ -19,7 +19,7 @@ class Naive:
 
     def calc_similarity_all(self):
         similarity_all = []
-        for i in tqdm(range(len(self.set_ids) - 1), desc='Calculating similarity'):
+        for i in tqdm(range(len(self.set_ids) - 1), desc='Calculating naive similarity'):
             set1 = set(self.map[self.set_ids[i]])
             id1 = self.set_ids[i]
             for j in range(i + 1, len(self.set_ids)):
