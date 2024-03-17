@@ -2,26 +2,17 @@ import random
 from collector import Collector
 import numpy as np
 import tqdm
+import numba
+from numba import jit
 
 
 class MinHash:
-    def __init__(self, __iteration=10, __bound=0.9, __text_sel=3):
-        self.map = {}
-        self.set_ids = []
-        self.all_values = []
+    def __init__(self, __collect, __iteration=10, __bound=0.9):
         self.iteration = __iteration
         self.bound = __bound
-        self.text_sel = __text_sel
-        self._pre_process()
 
-    def _pre_process(self):
-        # FIXME: 1. 从Collector中获取数据
-        """texts = ['../data/E1_AOL-out.txt',
-                 '../data/E1_Booking-out.txt',
-                 '../data/E1_kosarak_100k.txt']
-        text = '../data/test.txt'"""
-        collector = Collector(self.text_sel)
-        self.map = collector.get_data()
+        collector = __collect
+        self.map = collector.get_map()
         self.set_ids = collector.get_keys()
         self.all_values = collector.get_all_values()
 
@@ -29,9 +20,8 @@ class MinHash:
     def number_of_sets(self):
         return len(self.set_ids)
 
-    def get_hash(self):
-        # 返回一个打乱顺序的all_values
-        return random.sample(self.all_values, len(self.all_values))
+    def get_hash_func(self):
+        random.shuffle(self.all_values)
 
     def calc_minhash(self, set_id: int, hash_values: list):
         # hash_values = self.get_hash()
@@ -46,10 +36,10 @@ class MinHash:
                 break
         return min_hash
 
-    def calc_all_minhash(self, hash_values: list):
+    def calc_all_minhash(self):
         min_hash_values = []
         for set_id in self.set_ids:
-            min_hash = self.calc_minhash(set_id, hash_values)
+            min_hash = self.calc_minhash(set_id, self.all_values)
             min_hash_values.append(min_hash)
 
         return min_hash_values
@@ -57,9 +47,10 @@ class MinHash:
     def calc_hash_table(self) -> list:
         hash_table = []
         iteration = self.iteration
-        for i in tqdm.tqdm(range(iteration), desc='Calculating hash table'):
-            hash_values = self.get_hash()
-            min_hash_values = self.calc_all_minhash(hash_values)
+        for _ in tqdm.tqdm(range(iteration), desc='Calculating hash table'):
+            # hash_values = self.get_hash_func()
+            self.get_hash_func()
+            min_hash_values = self.calc_all_minhash()
             # print(min_hash_values)
             hash_table.append(min_hash_values)
         return hash_table
@@ -76,7 +67,7 @@ class MinHash:
                 similarity.append(count / len(hash_table[i]))'''
         row = len(hash_table)
         col = len(hash_table[0])
-        for i in tqdm.tqdm(range(col-1), desc='Calculating similarity'):
+        for i in tqdm.tqdm(range(col - 1), desc='Calculating similarity'):
             for j in range(i + 1, col):
                 count = 0
                 for k in range(row):

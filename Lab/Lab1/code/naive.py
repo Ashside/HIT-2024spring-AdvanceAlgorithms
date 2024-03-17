@@ -1,16 +1,17 @@
 from collector import Collector
 from tqdm import tqdm
 
+
 class Naive:
-    def __init__(self, __bound=0.9, __text_sel=3):
-        collector = Collector(__text_sel)
-        self.map = collector.get_data()
+    def __init__(self, __collect, __bound=0.9):
+        collector = __collect
+        self.map = collector.get_map()
         self.set_ids = collector.get_keys()
         self.all_values = collector.get_all_values()
         self.bound = __bound
 
     def calc_similarity(self, set1, set2):
-        similarity = 0
+
         union = len(set1.union(set2))
         inter = len(set1.intersection(set2))
         similarity = float(inter / union)

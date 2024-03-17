@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfe8b3f9-6376-44e8-b3e8-a31ad1ef7b27" name="更改" comment="Lab2 部分完成">
+      <change beforePath="$PROJECT_DIR$/.idea/AdvanceAlgorithms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AdvanceAlgorithms.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab/Lab1/code/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/Lab1/code/collector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab/Lab1/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/Lab1/code/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab/Lab1/code/minHash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/Lab1/code/minHash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab/Lab1/code/naive.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/Lab1/code/naive.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +22,7 @@
       <list>
         <option value="Python Unit Test" />
         <option value="Python Script" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -41,6 +47,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go 构建.go build naive.go.executor&quot;: &quot;Run&quot;,
     &quot;Python.collector.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.minHash.executor&quot;: &quot;Run&quot;,
@@ -52,7 +60,8 @@
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Program Files (x86)/test/AdvanceAlgorithms&quot;,
+    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/anaconda3/condabin/conda.bat&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -68,10 +77,48 @@
       <recent name="F:\Program Files (x86)\test\AdvanceAlgorithms\Lab\Lab1\data" />
     </key>
   </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="go build naive.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="AdvanceAlgorithms" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/Lab/Lab1/code/naive.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AdvanceAlgorithms" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Lab/Lab1/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Lab/Lab1/code/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Go 构建.go build naive.go" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
+        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14808.20" />
       </set>
     </attachedChunks>
   </component>
@@ -96,6 +143,10 @@
       <workItem from="1710152022140" duration="1174000" />
       <workItem from="1710153879022" duration="371000" />
       <workItem from="1710248938099" duration="99000" />
+      <workItem from="1710323400443" duration="376000" />
+      <workItem from="1710570498202" duration="625000" />
+      <workItem from="1710575330404" duration="427000" />
+      <workItem from="1710590617401" duration="145000" />
     </task>
     <task id="LOCAL-00001" summary="Lab1 initial">
       <option name="closed" value="true" />
