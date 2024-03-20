@@ -3,6 +3,11 @@ from tqdm import tqdm
 
 
 class Naive:
+    """
+    用于计算naive similarity
+    :param __collect: 数据收集器
+    :param __bound: 相似度的阈值
+    """
     def __init__(self, __collect, __bound=0.9):
         collector = __collect
         self.map = collector.get_map()
@@ -27,5 +32,5 @@ class Naive:
                 id2 = self.set_ids[j]
                 similarity = self.calc_similarity(set1, set2)
                 if similarity >= self.bound:
-                    similarity_all.append((id1, id2, similarity))
+                    similarity_all.append(f"{id1}\t{id2}")
         return similarity_all

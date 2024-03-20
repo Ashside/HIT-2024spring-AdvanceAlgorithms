@@ -38,19 +38,24 @@ def compare_file(_sel, _n_samples):
 
     _cnt = 0
     # 对比两者的结果
-    for i in range(len(_minhash_keys)):
-        if _minhash_map[_minhash_keys[i]] != _naive_map[_naive_keys[i]]:
-            # 记录不同的数据数量
+    for i in range(max(len(_minhash_keys), len(_naive_keys))):
+        if i < len(_minhash_keys) and i < len(_naive_keys):
+            if _minhash_map[_minhash_keys[i]] != _naive_map[_naive_keys[i]]:
+                _cnt += 1
+        elif i < len(_minhash_keys):
             _cnt += 1
+        elif i < len(_naive_keys):
+            _cnt += 1
+
     if _cnt > 0:
-        print(f'{_cnt / len(_minhash_keys) * 100}% data are different')
+        print(f'{float(_cnt) / len(_minhash_keys) * 100}% data are different')
     else:
         print('All data are the same')
 
 
 if __name__ == '__main__':
     iteration = 100
-    bound = 0.9
+    bound = 0.99
     text_sel = 0
     n_samples = 1000
     for text_sel in range(3):

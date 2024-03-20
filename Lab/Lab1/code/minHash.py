@@ -7,6 +7,12 @@ from numba import jit
 
 
 class MinHash:
+    """
+    用于计算minHash similarity
+    :param __collect: 数据收集器
+    :param __iteration: 迭代次数
+    :param __bound: 相似度的阈值
+    """
     def __init__(self, __collect, __iteration=10, __bound=0.9):
         self.iteration = __iteration
         self.bound = __bound
@@ -73,9 +79,9 @@ class MinHash:
                 for k in range(row):
                     if hash_table[k][i] == hash_table[k][j]:
                         count += 1
-                if float(count / row) >= self.bound:
+                if float(count) / float(row) >= self.bound:
                     # print(f'set {i} and set {j} are similar')
-                    similarity.append((self.set_ids[i], self.set_ids[j], count / row))
+                    similarity.append(f"{self.set_ids[i]}\t{self.set_ids[j]}")
 
         return similarity
 

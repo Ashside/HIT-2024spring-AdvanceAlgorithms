@@ -2,7 +2,14 @@ import random
 
 
 class Collector:
-    def __init__(self, __text_sel=3, __n_samples=1000,__get_compares=False,__get_minhash=False):
+    """
+    用于收集数据
+    :param __text_sel: 选择的数据集
+    :param __n_samples: 选择的样本数量
+    :param __get_compares: 是否获取比较结果
+    :param __get_minhash: 是否获取minhash的结果
+    """
+    def __init__(self, __text_sel=3, __n_samples=1000, __get_compares=False, __get_minhash=False):
 
         self.map = {}
         self.get_compares = __get_compares
