@@ -1,7 +1,11 @@
+import numpy as np
+
 from collector import Collector
 from minHash import MinHash
 from naive import Naive
 
+
+# import matplotlib.pyplot as plt
 
 def write_minHash(_collector, _n_samples, _bound=0.9, _iteration=10):
     # 获取数据
@@ -36,35 +40,35 @@ def compare_file(_sel, _n_samples):
     _minhash_keys = _minhash_collector.get_keys()
     _naive_keys = _naive_collector.get_keys()
 
-    _cnt = 0
-    # 对比两者的结果
-    for i in range(max(len(_minhash_keys), len(_naive_keys))):
-        if i < len(_minhash_keys) and i < len(_naive_keys):
-            if _minhash_map[_minhash_keys[i]] != _naive_map[_naive_keys[i]]:
-                _cnt += 1
-        elif i < len(_minhash_keys):
-            _cnt += 1
-        elif i < len(_naive_keys):
-            _cnt += 1
-
-    if _cnt > 0:
-        print(f'{float(_cnt) / len(_minhash_keys) * 100}% data are different')
-    else:
-        print('All data are the same')
+    # 统计minhash的value个数
+    minhash_values = 0.0
+    for _k in _minhash_keys:
+        minhash_values += len(_minhash_map[_k])
+    # 统计naive的value个数
+    naive_values = 0.0
+    for _k in _naive_keys:
+        naive_values += len(_naive_map[_k])
+    return min(minhash_values, naive_values) / max(minhash_values, naive_values)
 
 
 if __name__ == '__main__':
-    iteration = 100
-    bound = 0.99
+    iteration = 10
+    bound = 0.7
     text_sel = 0
-    n_samples = 1000
+    n_samples = 500
+    acc = {}
     for text_sel in range(3):
         # 获取数据
         collector = Collector(text_sel, n_samples)
-        # 写入minHash的结果
-        write_minHash(collector, n_samples, bound, iteration)
-        # 写入naive的结果
-        write_naive(collector, n_samples, bound)
-
-        # 对比两者的结果
-        compare_file(text_sel, n_samples)
+        for iteration in range(10, 110, 10):
+            # 写入minHash的结果
+            write_minHash(collector, n_samples, bound, iteration)
+            # 写入naive的结果
+            write_naive(collector, n_samples, bound)
+            # 对比两者的结果
+            acc[(iteration, text_sel)] = compare_file(text_sel, n_samples)
+    # 写入文件
+    with open('../result/compare.txt', 'w') as file:
+        for k, v in acc.items():
+            file.write(f'{k[0]}\t{k[1]}\t{v}\n')
+    print('Compare file has been written successfully')

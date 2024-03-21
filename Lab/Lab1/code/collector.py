@@ -9,8 +9,12 @@ class Collector:
     :param __get_compares: 是否获取比较结果
     :param __get_minhash: 是否获取minhash的结果
     """
-    def __init__(self, __text_sel=3, __n_samples=1000, __get_compares=False, __get_minhash=False):
 
+    def __init__(self, __text_sel=3, __n_samples=1000, __get_compares=False, __get_minhash=False):
+        """
+        初始化数据收集器
+
+        """
         self.map = {}
         self.get_compares = __get_compares
         switcher_data = {
@@ -95,3 +99,13 @@ class Collector:
         # 去重
         all_values = list(set(all_values))
         return all_values
+
+    def get_acc(self):
+        """
+        弃用
+        :return:
+        """
+        if self.get_compares:
+            return self.accs
+        else:
+            raise Exception('No acc data')
