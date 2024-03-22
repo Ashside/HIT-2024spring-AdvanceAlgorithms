@@ -16,6 +16,7 @@ def calc_similarity(set1, set2):
     调用关系
     calc_similarity_all
     """
+
     union = len(set1.union(set2))
     inter = len(set1.intersection(set2))
     similarity = float(inter / union)

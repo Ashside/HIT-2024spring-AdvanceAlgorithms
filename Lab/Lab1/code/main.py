@@ -3,7 +3,8 @@ import numpy as np
 from collector import Collector
 from minHash import MinHash
 from naive import Naive
-
+import time
+import pandas as pd
 
 # import matplotlib.pyplot as plt
 
@@ -62,13 +63,20 @@ if __name__ == '__main__':
         collector = Collector(text_sel, n_samples)
         for iteration in range(10, 110, 10):
             # 写入minHash的结果
+            t_minhash_start = time.perf_counter()
             write_minHash(collector, n_samples, bound, iteration)
+            t_minhash_end = time.perf_counter()
+            period_minhash = t_minhash_end - t_minhash_start
+
+            t_naive_start = time.perf_counter()
             # 写入naive的结果
             write_naive(collector, n_samples, bound)
+            t_naive_end = time.perf_counter()
+            period_naive = t_naive_end - t_naive_start
             # 对比两者的结果
-            acc[(iteration, text_sel)] = compare_file(text_sel, n_samples)
+            acc[(iteration, text_sel)] = (compare_file(text_sel, n_samples), period_minhash, period_naive)
     # 写入文件
-    with open('../result/compare.txt', 'w') as file:
+    with open('../result/compare.csv', 'w') as file:
         for k, v in acc.items():
-            file.write(f'{k[0]}\t{k[1]}\t{v}\n')
+            file.write(f'{k[0]},{k[1]},{v[0]},{v[1]},{v[2]}\n')
     print('Compare file has been written successfully')

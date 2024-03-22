@@ -105,6 +105,8 @@ class MinHash:
                     # print(f'set {i} and set {j} are similar')
                     similarity.append(f"{self.set_ids[i]}\t{self.set_ids[j]}") # 记录相似的集合
 
+
+
         return similarity
 
     def __str__(self):
