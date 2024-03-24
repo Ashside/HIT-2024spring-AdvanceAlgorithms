@@ -1,31 +1,18 @@
+// Package: main运行入口
 package main
 
 import (
 	"fmt"
-	"math/rand"
 	"time"
 )
 
 func main() {
-	var n int
-	fmt.Println("Please input the number of elements:")
-	_, err := fmt.Scan(&n)
-	if err != nil {
-		return
+	n, err := getInputNumber()
+	if err {
+		return // 输入错误
 	}
-    if n <= 0 {
-        fmt.Println("n should be a positive integer.")
-        return
-    }
 
-	// 生成随机种子
-	rand.Seed(time.Now().Unix())
-	// 生成随机数组
-	nums := make([]int, n)
-	for i := range nums {
-		nums[i] = rand.Intn(n * 10)
-	}
-	fmt.Println("生成完成")
+	nums := genNums(n)
 
 	// 快速排序
 	start1 := time.Now()
@@ -43,26 +30,27 @@ func main() {
 
 	// 随机选择
 
-    if n>=3{
-        epochCnt := 0
-        start3 := time.Now()
-        if n%2 == 0 {
-            rs1 := randomSel{nums: nums, k: n / 2, epoch: 1}
-            rs2 := randomSel{nums: nums, k: n/2 + 1, epoch: 1}
-            fmt.Println("Median:", float64(rs1.sort()+rs2.sort())/2)
-            epochCnt = rs1.epoch + rs2.epoch
-        } else {
-            rs := randomSel{nums: nums, k: (n + 1) / 2, epoch: 1}
-            fmt.Println("Median:", float64(rs.sort()))
-            epochCnt = rs.epoch
-        }
-        end3 := time.Now()
-        fmt.Println("随机选择耗时：", end3.Sub(start3))
-        fmt.Println("随机选择递归次数：", epochCnt)
-    }else{
-        fmt.Println("随机选择需要n>=3")
-    }
-
+	if n >= 3 {
+		epochCnt := 0
+		start3 := time.Now()
+		if n%2 == 0 {
+			// 偶数个元素
+			rs1 := randomSel{nums: nums, k: n / 2, epoch: 1}
+			rs2 := randomSel{nums: nums, k: n/2 + 1, epoch: 1}
+			fmt.Println("Median:", float64(rs1.sort()+rs2.sort())/2)
+			epochCnt = rs1.epoch + rs2.epoch
+		} else {
+			// 奇数个元素
+			rs := randomSel{nums: nums, k: (n + 1) / 2, epoch: 1}
+			fmt.Println("Median:", float64(rs.sort()))
+			epochCnt = rs.epoch
+		}
+		end3 := time.Now()
+		fmt.Println("随机选择耗时：", end3.Sub(start3))
+		fmt.Println("随机选择递归次数：", epochCnt)
+	} else {
+		fmt.Println("随机选择需要n>=3")
+	}
 
 	//fmt.Println("After sort:", nums)
 }
