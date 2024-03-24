@@ -8,6 +8,7 @@ type medianFinder struct {
 	nums []int
 }
 
+// findMedian 查找中位数
 func (m *medianFinder) findMedian() float64 {
 	length := len(m.nums)
 	//rand.Seed(time.Now().Unix())
@@ -18,6 +19,7 @@ func (m *medianFinder) findMedian() float64 {
 	}
 }
 
+// findKth 查找第k小的元素
 func (m *medianFinder) findKth(left, right, k int) int {
 	if left == right {
 		return m.nums[left]
@@ -32,6 +34,7 @@ func (m *medianFinder) findKth(left, right, k int) int {
 	}
 }
 
+// partition 分区
 func (m *medianFinder) partition(left, right int) int {
 	pivotIndex := rand.Intn(right-left+1) + left
 	pivot := m.nums[pivotIndex]

@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// genNums 生成随机数组
 func genNums(n int) []int {
 	// 生成随机种子
 	rand.Seed(time.Now().Unix())
@@ -17,6 +18,8 @@ func genNums(n int) []int {
 	fmt.Println("生成完成")
 	return nums
 }
+
+// getInputNumber 获取输入的数字
 func getInputNumber() (int, bool) {
 	var n int
 	fmt.Println("Please input the number of elements:")

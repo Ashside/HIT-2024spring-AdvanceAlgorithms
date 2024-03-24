@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// rank 计算x在nums中的排名, 即比x小的元素个数
 func rank(x int, nums []int) int {
 	rank := 0
 	for _, num := range nums {
@@ -23,6 +24,7 @@ type randomSel struct {
 	epoch int // 递归次数
 }
 
+// selectRandomElements 从数组中随机选择指定数量的元素
 func (rs *randomSel) selectRandomElements(numElements int) []int {
 
 	// 使用当前时间作为随机种子
@@ -48,6 +50,7 @@ func (rs *randomSel) selectRandomElements(numElements int) []int {
 	return selectedElements
 }
 
+// sort 递归排序
 func (rs *randomSel) sort() int {
 	n := len(rs.nums)
 	selNums := rs.selectRandomElements(int(math.Pow(float64(n), 0.75)))
