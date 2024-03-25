@@ -6,7 +6,7 @@ type quickSort struct {
 
 // medianThree 三数取中值
 func (q *quickSort) medianThree(left, mid, right int) int {
-	// 此处使用异或运算来简化代码（!= 在这里起到异或的作用）
+	// 此处使用异或运算来简化代码
 	if (q.nums[left] < q.nums[mid]) != (q.nums[left] < q.nums[right]) {
 		return left
 	} else if (q.nums[mid] < q.nums[left]) != (q.nums[mid] < q.nums[right]) {
@@ -55,8 +55,8 @@ func (q *quickSort) QSort(left, right int) {
 	}
 }
 
-// getMid 获取中位数
-func (q *quickSort) getMid() float64 {
+// getMedian 获取中位数
+func (q *quickSort) getMedian() float64 {
 	q.QSort(0, len(q.nums)-1)
 	if len(q.nums)%2 == 0 {
 		return float64(q.nums[len(q.nums)/2-1]+q.nums[len(q.nums)/2]) / 2.0

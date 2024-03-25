@@ -17,14 +17,14 @@ func main() {
 	// 快速排序
 	start1 := time.Now()
 	q := quickSort{nums: nums}
-	fmt.Println("Median:", q.getMid())
+	fmt.Println("Median:", q.getMedian())
 	end1 := time.Now()
 	fmt.Println("快速排序耗时：", end1.Sub(start1))
 
 	// 线性时间选择
 	start2 := time.Now()
 	m := medianFinder{nums: nums}
-	fmt.Println("Median:", m.findMedian())
+	fmt.Println("Median:", m.getMedian())
 	end2 := time.Now()
 	fmt.Println("线性时间选择耗时：", end2.Sub(start2))
 
@@ -37,12 +37,12 @@ func main() {
 			// 偶数个元素
 			rs1 := randomSel{nums: nums, k: n / 2, epoch: 1}
 			rs2 := randomSel{nums: nums, k: n/2 + 1, epoch: 1}
-			fmt.Println("Median:", float64(rs1.sort()+rs2.sort())/2)
+			fmt.Println("Median:", float64(rs1.selKth()+rs2.selKth())/2)
 			epochCnt = rs1.epoch + rs2.epoch
 		} else {
 			// 奇数个元素
 			rs := randomSel{nums: nums, k: (n + 1) / 2, epoch: 1}
-			fmt.Println("Median:", float64(rs.sort()))
+			fmt.Println("Median:", float64(rs.selKth()))
 			epochCnt = rs.epoch
 		}
 		end3 := time.Now()
@@ -52,5 +52,5 @@ func main() {
 		fmt.Println("随机选择需要n>=3")
 	}
 
-	//fmt.Println("After sort:", nums)
+	//fmt.Println("After selKth:", nums)
 }

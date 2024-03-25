@@ -8,8 +8,8 @@ type medianFinder struct {
 	nums []int
 }
 
-// findMedian 查找中位数
-func (m *medianFinder) findMedian() float64 {
+// getMedian 查找中位数
+func (m *medianFinder) getMedian() float64 {
 	length := len(m.nums)
 	//rand.Seed(time.Now().Unix())
 	if length%2 == 0 {

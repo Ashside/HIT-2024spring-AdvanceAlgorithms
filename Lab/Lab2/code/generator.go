@@ -15,7 +15,7 @@ func genNums(n int) []int {
 	for i := range nums {
 		nums[i] = rand.Intn(n * 10)
 	}
-	fmt.Println("生成完成")
+	fmt.Println("Generate successfully")
 	return nums
 }
 
@@ -28,7 +28,7 @@ func getInputNumber() (int, bool) {
 		return 0, true
 	}
 	if n <= 0 {
-		fmt.Println("n should be a positive integer.")
+		fmt.Println("input should be a positive integer.")
 		return 0, true
 	}
 	return n, false

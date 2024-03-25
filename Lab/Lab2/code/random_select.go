@@ -50,8 +50,8 @@ func (rs *randomSel) selectRandomElements(numElements int) []int {
 	return selectedElements
 }
 
-// sort 递归排序
-func (rs *randomSel) sort() int {
+// selKth 递归排序
+func (rs *randomSel) selKth() int {
 	n := len(rs.nums)
 	selNums := rs.selectRandomElements(int(math.Pow(float64(n), 0.75)))
 
@@ -85,10 +85,11 @@ func (rs *randomSel) sort() int {
 	// 判断
 	if Lp <= rs.k && rs.k <= Hp && float64(len(P)) <= 4*(math.Pow(float64(n), 0.75))+1 {
 		sort.Ints(P)
-		return P[rs.k-Lp-1] // 返回第k - Lp 小的元素，注意索引偏移
+		rs.epoch++
+		return P[rs.k-Lp-1] // 返回第k - Lp 小的元素，注意索引偏移需要减1
 	} else {
 		rs.epoch++
-		return rs.sort()
+		return rs.selKth()
 	}
 
 }
