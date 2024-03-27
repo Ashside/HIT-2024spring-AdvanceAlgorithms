@@ -12,8 +12,31 @@ func main() {
 		return // 输入错误
 	}
 
-	nums := genNums(n)
+	// 生成均匀分布随机数组
+	fmt.Println("Generating uniform random numbers...")
+	uniformNums := genUniformNums(n)
+	compTime(uniformNums, n)
+	fmt.Println("-----------------------------")
 
+	// 生成正态分布随机数组
+	fmt.Println("Generating normal random numbers...")
+	normalNums := genNormalNums(n)
+	compTime(normalNums, n)
+	fmt.Println("-----------------------------")
+
+	// 不保证有限时间内结束
+	if n <= 500 {
+		// 生成Zipf分布随机数组
+		fmt.Println("Generating Zipf random numbers...")
+		zipfNums := genZipfNums(n)
+		compTime(zipfNums, n)
+		fmt.Println("-----------------------------")
+	}
+
+	//fmt.Println("After selKth:", uniformNums)
+}
+
+func compTime(nums []int, n int) {
 	// 快速排序
 	start1 := time.Now()
 	q := quickSort{nums: nums}
@@ -29,28 +52,12 @@ func main() {
 	fmt.Println("线性时间选择耗时：", end2.Sub(start2))
 
 	// 随机选择
-
-	if n >= 3 {
-		epochCnt := 0
-		start3 := time.Now()
-		if n%2 == 0 {
-			// 偶数个元素
-			rs1 := randomSel{nums: nums, k: n / 2, epoch: 1}
-			rs2 := randomSel{nums: nums, k: n/2 + 1, epoch: 1}
-			fmt.Println("Median:", float64(rs1.selKth()+rs2.selKth())/2)
-			epochCnt = rs1.epoch + rs2.epoch
-		} else {
-			// 奇数个元素
-			rs := randomSel{nums: nums, k: (n + 1) / 2, epoch: 1}
-			fmt.Println("Median:", float64(rs.selKth()))
-			epochCnt = rs.epoch
-		}
-		end3 := time.Now()
-		fmt.Println("随机选择耗时：", end3.Sub(start3))
-		fmt.Println("随机选择递归次数：", epochCnt)
-	} else {
-		fmt.Println("随机选择需要n>=3")
-	}
-
-	//fmt.Println("After selKth:", nums)
+	epochCnt := 0
+	start3 := time.Now()
+	rs := randomSel{nums: nums, k: n / 2, epoch: epochCnt}
+	fmt.Println("Median:", rs.getMedian())
+	epochCnt = rs.epoch
+	end3 := time.Now()
+	fmt.Println("随机选择耗时：", end3.Sub(start3))
+	fmt.Println("随机选择递归次数：", epochCnt)
 }

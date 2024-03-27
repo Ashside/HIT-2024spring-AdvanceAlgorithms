@@ -93,3 +93,22 @@ func (rs *randomSel) selKth() int {
 	}
 
 }
+
+// getMedian 获取中位数
+func (rs *randomSel) getMedian() float64 {
+	n := len(rs.nums)
+	if n%2 == 0 {
+		// 偶数个元素
+		rs1 := randomSel{nums: rs.nums, k: n / 2, epoch: 0}
+		rs2 := randomSel{nums: rs.nums, k: n/2 + 1, epoch: 0}
+		median := float64(rs1.selKth()+rs2.selKth()) / 2
+		rs.epoch = rs1.epoch + rs2.epoch
+		return median
+	} else {
+		// 奇数个元素
+		rs1 := randomSel{nums: rs.nums, k: (n + 1) / 2, epoch: 0}
+		median := float64(rs1.selKth())
+		rs.epoch = rs1.epoch
+		return median
+	}
+}
