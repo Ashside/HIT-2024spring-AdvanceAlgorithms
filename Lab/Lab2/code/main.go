@@ -31,6 +31,8 @@ func main() {
 		zipfNums := genZipfNums(n)
 		compTime(zipfNums, n)
 		fmt.Println("-----------------------------")
+	} else {
+		fmt.Println("Zipf distribution is not recommended for large n.")
 	}
 
 	//fmt.Println("After selKth:", uniformNums)
@@ -54,7 +56,7 @@ func compTime(nums []int, n int) {
 	// 随机选择
 	epochCnt := 0
 	start3 := time.Now()
-	rs := randomSel{nums: nums, k: n / 2, epoch: epochCnt}
+	rs := randomSel{nums: nums, k: n / 2, epoch: epochCnt, y: 0.9}
 	fmt.Println("Median:", rs.getMedian())
 	epochCnt = rs.epoch
 	end3 := time.Now()

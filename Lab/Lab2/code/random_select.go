@@ -20,8 +20,9 @@ func rank(x int, nums []int) int {
 
 type randomSel struct {
 	nums  []int
-	k     int // 第 k 小的元素
-	epoch int // 递归次数
+	k     int     // 第 k 小的元素
+	epoch int     // 递归次数
+	y     float64 // 算法参数
 }
 
 // selectRandomElements 从数组中随机选择指定数量的元素
@@ -53,13 +54,13 @@ func (rs *randomSel) selectRandomElements(numElements int) []int {
 // selKth 递归排序
 func (rs *randomSel) selKth() int {
 	n := len(rs.nums)
-	selNums := rs.selectRandomElements(int(math.Pow(float64(n), 0.75)))
+	selNums := rs.selectRandomElements(int(math.Pow(float64(n), rs.y)))
 
 	// 快速排序
 	sort.Ints(selNums)
 
 	// 理论上的kth数在排序后的数组中的索引
-	x := float64(rs.k) * math.Pow(float64(n), -0.25)
+	x := float64(rs.k) * math.Pow(float64(n), -1+rs.y) // 注意这里的k是从1开始计数的，而不是从0开始
 
 	// 考察上下边界
 	left := math.Max(math.Floor(x-math.Pow(float64(n), 0.5)), 0)
@@ -83,7 +84,7 @@ func (rs *randomSel) selKth() int {
 	}
 
 	// 判断
-	if Lp <= rs.k && rs.k <= Hp && float64(len(P)) <= 4*(math.Pow(float64(n), 0.75))+1 {
+	if Lp <= rs.k && rs.k <= Hp && float64(len(P)) <= 4*(math.Pow(float64(n), rs.y))+1 {
 		sort.Ints(P)
 		rs.epoch++
 		return P[rs.k-Lp-1] // 返回第k - Lp 小的元素，注意索引偏移需要减1
@@ -99,14 +100,14 @@ func (rs *randomSel) getMedian() float64 {
 	n := len(rs.nums)
 	if n%2 == 0 {
 		// 偶数个元素
-		rs1 := randomSel{nums: rs.nums, k: n / 2, epoch: 0}
-		rs2 := randomSel{nums: rs.nums, k: n/2 + 1, epoch: 0}
+		rs1 := randomSel{nums: rs.nums, k: n / 2, epoch: 0, y: rs.y}
+		rs2 := randomSel{nums: rs.nums, k: n/2 + 1, epoch: 0, y: rs.y}
 		median := float64(rs1.selKth()+rs2.selKth()) / 2
 		rs.epoch = rs1.epoch + rs2.epoch
 		return median
 	} else {
 		// 奇数个元素
-		rs1 := randomSel{nums: rs.nums, k: (n + 1) / 2, epoch: 0}
+		rs1 := randomSel{nums: rs.nums, k: (n + 1) / 2, epoch: 0, y: rs.y}
 		median := float64(rs1.selKth())
 		rs.epoch = rs1.epoch
 		return median
