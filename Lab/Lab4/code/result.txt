@@ -1,0 +1,24 @@
+RS
+Method: RS, Sample Num: 1, Time: 0.03500008583068848
+Method: RS, Sample Num: 10, Time: 0.4256162643432617
+Method: RS, Sample Num: 50, Time: 2.2277109622955322
+Method: RS, Sample Num: 100, Time: 5.847914695739746
+Method: RS, Sample Num: 500, Time: 22.501706838607788
+EW
+Method: EW, Sample Num: 1, Time: 0.7519378662109375
+Method: EW, Sample Num: 10, Time: 1.0860717296600342
+Method: EW, Sample Num: 50, Time: 2.7326879501342773
+Method: EW, Sample Num: 100, Time: 5.9961097240448
+Method: EW, Sample Num: 500, Time: 22.482077598571777
+EO
+Method: EO, Sample Num: 1, Time: 0.03700065612792969
+Method: EO, Sample Num: 10, Time: 0.36086559295654297
+Method: EO, Sample Num: 50, Time: 1.901667594909668
+Method: EO, Sample Num: 100, Time: 5.053037405014038
+Method: EO, Sample Num: 500, Time: 20.862427949905396
+OE
+Method: OE, Sample Num: 1, Time: 5.91885232925415
+Method: OE, Sample Num: 10, Time: 6.239207983016968
+Method: OE, Sample Num: 50, Time: 7.873269557952881
+Method: OE, Sample Num: 100, Time: 11.13127088546753
+Method: OE, Sample Num: 500, Time: 27.72726273536682

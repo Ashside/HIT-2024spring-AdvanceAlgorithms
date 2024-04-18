@@ -1,10 +1,13 @@
 import sqlite3
 import os
+import time
+
 import pandas as pd
 from SampleUtils import SampleUtils
 from WeightUtils import WeightCalculator
-from SqlUtils import *
+import numpy as np
 
+np.seterr(divide='ignore', invalid='ignore')
 methods = ['RS', 'EW', 'EO', 'OE']
 if __name__ == '__main__':
     # 创建数据库连接
@@ -24,12 +27,20 @@ if __name__ == '__main__':
 
     # 连接Twitter_user和userLike
     join_key = 'source'
+    sample_num = [1, 10, 50, 100, 500]
+    relations = [userLike,Twitter_user]
+    for i in range(4):
+        cur_method = methods[i]
+        # 计算权重
+        __start = time.time()
+        weight_calculator = WeightCalculator(cur_method, relations)
+        ws = weight_calculator.calc_weights()
+        for num in sample_num:
+            # 采样
+            sample_utils = SampleUtils(relations, ws, num)
+            sample_res = sample_utils.random_sample()
+            print(f"Method: {cur_method}, Sample Num: {num}, Time: {time.time() - __start}")
 
-    cur_method = methods[2]
-    # 计算权重
-    weight_calculator = WeightCalculator(cur_method, [Twitter_user, Twitter_user, Twitter_user])
-    ws = weight_calculator.calc_weights()
-    print(ws)
+    conn.close()
 
-    # 连接Twitter_user和userLike
-    # result = JOIN(Twitter_user, userLike, weight_Twitter_user, weight_userLike, join_key)
+

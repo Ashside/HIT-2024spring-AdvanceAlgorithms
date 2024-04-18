@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import tqdm
 
 
 class WeightCalculator:
@@ -30,7 +31,7 @@ class WeightCalculator:
         根据'method'属性调用适当的权重计算方法。
     """
 
-    def __init__(self, method: str, relations: list[pd.DataFrame]):
+    def __init__(self, method: str, relations: list[pd.DataFrame], random_step=100):
         """
         构造WeightCalculator对象所需的所有必要属性。
 
@@ -41,6 +42,7 @@ class WeightCalculator:
             relations : list
                 一个列表，包含需要计算权重的关系
         """
+        self.random_step = random_step
         self.method = method
         self.relations = relations
         self.weights = []
@@ -133,9 +135,86 @@ class WeightCalculator:
 
     def OE(self):
         """
-        一个特定的权重计算方法的占位符。
+        分为三个步骤：
+        1. 初始化权重，将最后一个关系的权重全部初始化为1，其他关系的权重初始化为0。
+        2. 随机游走，随机选择一条路径，更新权重。
+        3. 倒序向前计算权重。count小于self.random_step/2的元组权重按照EW计算，count大于self.random_step/2的元组权重是weight/count。
         """
-        return self.weights
+        __weights = [self.relations[-1]['weight'].values]
+        self.relations[-1]['count'] = np.zeros(len(self.relations[-1]))
+        # 将前n-1个关系的权重初始化为0
+        for i in range(len(self.relations) - 2, -1, -1):
+            __relation1 = self.relations[i]
+            __relation1['weight'] = np.zeros(len(__relation1))
+            # 添加count列,初始化为0
+            __relation1['count'] = np.zeros(len(__relation1))
+
+            self.relations[i] = __relation1
+
+        # 随机游走
+        # for st in tqdm.tqdm(range(self.random_step)):
+        for st in range(self.random_step):
+            # 选择一条随机游走路径
+            path = []
+            # 根据连接键随机选择一条路径
+            for i in range(len(self.relations) - 2, -1, -1):
+                __relation1 = self.relations[i]
+                __relation2 = self.relations[i + 1]
+                __relation2_group = __relation2.groupby(self.join_key)
+                __relation1_group = __relation1.groupby(self.join_key)
+                # 随机选择一条路径
+                if len(path) == 0:
+                    # 随机选择一条路径
+                    sample1 = __relation1.sample(n=1, weights=np.ones(len(__relation1)))
+                    join_attr = sample1[self.join_key].values[0]
+                    if join_attr not in __relation2_group.groups:
+                        continue
+                    else:
+                        sample2 = __relation2_group.get_group(join_attr).sample(n=1, weights=np.ones(
+                            len(__relation2_group.get_group(join_attr))))
+                    path.insert(0, sample2)
+                    path.insert(0, sample1)
+
+                    # 更新count
+                    __relation1.loc[sample1.index, 'count'] += 1
+                    __relation2.loc[sample2.index, 'count'] += 1
+                    # 更新权重
+                    __relation1.loc[sample1.index, 'weight'] = sample2['weight'].values[0] * len(
+                        __relation2_group.get_group(join_attr))
+                    # print(__relation1.loc[sample1.index, 'weight'])
+                    # print(len(__relation2_group.get_group(join_attr)))
+                    self.relations[i] = __relation1
+                else:
+                    last_sample = path[0]
+                    join_attr = last_sample[self.join_key].values[0]
+                    next_sample = __relation1_group.get_group(join_attr).sample(n=1, weights=np.ones(
+                        len(__relation1_group.get_group(join_attr))))
+                    path.insert(0, next_sample)
+                    # 更新count
+                    __relation1.loc[next_sample.index, 'count'] += 1
+                    # 更新权重
+                    __relation1.loc[next_sample.index, 'weight'] += last_sample['weight'].values[0] * len(
+                        __relation2_group.get_group(join_attr))
+
+                    self.relations[i] = __relation1
+
+        # 倒序向前计算权重
+        for i in range(len(self.relations) - 2, -1, -1):
+            __relation1 = self.relations[i]
+            __relation2 = self.relations[i + 1]
+            __relation2_group = __relation2.groupby(self.join_key)
+            __relation1_group = __relation1.groupby(self.join_key)
+            # 按照count的大小判断权重的计算方法
+            __relation1['weight'] = __relation1.apply(
+                lambda x: x['weight'] / x['count'] if ((x['count'] > self.random_step / 2) or (
+                        x[self.join_key] not in __relation2_group.groups) )else
+                __relation2_group.get_group(
+                    x[self.join_key])['weight'].sum(), axis=1)
+
+            self.relations[i] = __relation1
+
+            __weights.insert(0, __relation1['weight'].values)
+        return __weights
 
     def calc_weights(self):
         """
