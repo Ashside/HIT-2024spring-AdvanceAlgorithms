@@ -4,7 +4,7 @@ import random
 class Collector:
     """
     用于收集数据
-    :param __text_sel: 选择的数据集
+    :param __text_sel: 选择的数据集，0: AOL, 1: Booking, 2: Kosarak, 3: Test
     :param __n_samples: 选择的样本数量
     :param __get_compares: 是否获取比较结果
     :param __get_minhash: 是否获取minhash的结果
