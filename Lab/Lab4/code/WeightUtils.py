@@ -8,25 +8,6 @@ class WeightCalculator:
     根据指定的方法和关系计算权重。
     ...
 
-    属性
-    ----------
-    method : str
-        一个字符串，表示用于计算权重的方法
-    relations : list
-        一个列表，包含需要计算权重的关系，每个关系都是一个DataFrame
-    weights : list
-        一个列表，用于存储计算出的权重，每个权重都是一个numpy数组
-
-    方法
-    -------
-    RS():
-        所有元组的权重都是1。
-    EW():
-        一个特定的权重计算方法的占位符。
-    EO():
-        一个特定的权重计算方法的占位符。
-    OE():
-        一个特定的权重计算方法的占位符。
     calc_weights():
         根据'method'属性调用适当的权重计算方法。
     """
@@ -90,9 +71,6 @@ class WeightCalculator:
         return self.weights
 
     def EW(self):
-        """
-        一个特定的权重计算方法的占位符。
-        """
         __weights = [self.relations[-1]['weight'].values]
         # 倒序向前计算权重
         for i in range(len(self.relations) - 2, -1, -1):

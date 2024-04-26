@@ -12,9 +12,10 @@ class SampleUtils:
         self.sample_num = sample_num
 
     def JOIN(self, relation1: pd.DataFrame, relation2: pd.DataFrame, weight1: np.array, weight2: np.array,
-             join_key: str) -> pd.DataFrame | None:
+             join_key: str,outer_join_attr = None) -> pd.DataFrame | None:
         """
         按权重随机抽样relation1,根据join_key连接relation2,并返回连接后的结果
+        :param outer_join_attr:
         :param self:
         :param relation1: 关系1，包含A,B两列
         :param relation2: 关系2，包含B,C两列
@@ -42,6 +43,8 @@ class SampleUtils:
         relation1['weight'] = weight1
         relation2['weight'] = weight2
 
+
+
         # 为relation添加索引
         relation1 = relation1.set_index(join_key)
         relation2 = relation2.set_index(join_key)
@@ -50,7 +53,10 @@ class SampleUtils:
         # 根据权重随机抽样relation1中的一个元组
         sample1 = relation1.sample(n=1, weights='weight')
 
-        join_attr = sample1.index[0]
+        if outer_join_attr is not None:
+            join_attr = outer_join_attr
+        else:
+            join_attr = sample1.index[0]
 
         # 根据权重随机抽样relation2中的一个元组
         if join_attr not in gruop_relation2.groups:
@@ -77,6 +83,7 @@ class SampleUtils:
     def random_sample(self):
         # 选择一条随机游走路径
         samples = []
+        __join_attr = None
         for it in range(self.sample_num):
 
             # 调用JOIN函数连接relation1和relation2
@@ -86,9 +93,10 @@ class SampleUtils:
                 weight1 = self.weights[i]
                 weight2 = self.weights[i + 1]
                 join_key = 'source'
-                sample = self.JOIN(relation1, relation2, weight1, weight2, join_key)
+                sample = self.JOIN(relation1, relation2, weight1, weight2, join_key,__join_attr)
                 if sample is not None:
                     samples.append(sample)
+                    __join_attr = sample[join_key].values[0]
                 else:
                     break
 

@@ -1,24 +1,32 @@
 RS
-Method: RS, Sample Num: 1, Time: 0.03500008583068848
-Method: RS, Sample Num: 10, Time: 0.4256162643432617
-Method: RS, Sample Num: 50, Time: 2.2277109622955322
-Method: RS, Sample Num: 100, Time: 5.847914695739746
-Method: RS, Sample Num: 500, Time: 22.501706838607788
+Method: RS, Weight Time: 0.0009992122650146484
+Method: RS, Sample Num: 1, Time: 0.04264402389526367
+Method: RS, Sample Num: 10, Time: 0.3873867988586426
+Method: RS, Sample Num: 50, Time: 1.839130163192749
+Method: RS, Sample Num: 100, Time: 3.4945101737976074
+Method: RS, Sample Num: 500, Time: 19.147817373275757
+Method: RS, Total Time: 24.912487745285034
 EW
-Method: EW, Sample Num: 1, Time: 0.7519378662109375
-Method: EW, Sample Num: 10, Time: 1.0860717296600342
-Method: EW, Sample Num: 50, Time: 2.7326879501342773
-Method: EW, Sample Num: 100, Time: 5.9961097240448
-Method: EW, Sample Num: 500, Time: 22.482077598571777
+Method: EW, Weight Time: 3.0797290802001953
+Method: EW, Sample Num: 1, Time: 0.03461575508117676
+Method: EW, Sample Num: 10, Time: 0.33904409408569336
+Method: EW, Sample Num: 50, Time: 1.801034688949585
+Method: EW, Sample Num: 100, Time: 3.4524266719818115
+Method: EW, Sample Num: 500, Time: 18.225322484970093
+Method: EW, Total Time: 26.932172775268555
 EO
-Method: EO, Sample Num: 1, Time: 0.03700065612792969
-Method: EO, Sample Num: 10, Time: 0.36086559295654297
-Method: EO, Sample Num: 50, Time: 1.901667594909668
-Method: EO, Sample Num: 100, Time: 5.053037405014038
-Method: EO, Sample Num: 500, Time: 20.862427949905396
+Method: EO, Weight Time: 0.023352622985839844
+Method: EO, Sample Num: 1, Time: 0.035219430923461914
+Method: EO, Sample Num: 10, Time: 0.369171142578125
+Method: EO, Sample Num: 50, Time: 1.7322697639465332
+Method: EO, Sample Num: 100, Time: 3.506014585494995
+Method: EO, Sample Num: 500, Time: 18.153198719024658
+Method: EO, Total Time: 23.819226264953613
 OE
-Method: OE, Sample Num: 1, Time: 5.91885232925415
-Method: OE, Sample Num: 10, Time: 6.239207983016968
-Method: OE, Sample Num: 50, Time: 7.873269557952881
-Method: OE, Sample Num: 100, Time: 11.13127088546753
-Method: OE, Sample Num: 500, Time: 27.72726273536682
+Method: OE, Weight Time: 9.468703031539917
+Method: OE, Sample Num: 1, Time: 0.03456544876098633
+Method: OE, Sample Num: 10, Time: 0.35442209243774414
+Method: OE, Sample Num: 50, Time: 1.8143458366394043
+Method: OE, Sample Num: 100, Time: 3.5645976066589355
+Method: OE, Sample Num: 500, Time: 18.734230756759644
+Method: OE, Total Time: 33.970864772796638
